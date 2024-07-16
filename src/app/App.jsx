@@ -5,11 +5,13 @@ import Cart from '../features/cart/Cart.jsx';
 import Total from '../features/total/Total.jsx';
 import Voucher from '../features/voucher/Voucher.jsx';
 import Owner from '../features/owner/Owner.jsx';
+import Menu from '../features/menu/Menu.jsx';
 
 function App() {
  return (
     <Provider store={store}>
         <div className="App">
+            <Menu />
             <Cart />
             <Total />
             <Voucher />
