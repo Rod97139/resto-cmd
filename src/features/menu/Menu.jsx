@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux"
 import * as ProductList from "../../common/models"
 import ProductCard from "../../common/components/ProductCard"
+import { addProduct } from "../../app/store"
 const Menu = () => {
     const dispatch = useDispatch()
   return (
@@ -10,10 +11,7 @@ const Menu = () => {
             ProductList
         ).map(
             product => <ProductCard key={product.name} product={product} onSelect={
-                        () => dispatch({
-                            type: "ADD_PRODUCT",
-                            payload: product
-                        })
+                        () => dispatch(addProduct(product))
                      } />
         )
       }

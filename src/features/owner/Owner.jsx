@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useStore } from "react-redux"
+import { updateFirstName } from "../../app/store"
 
 const Owner = () => {
     const store = useStore()
@@ -9,10 +10,7 @@ const Owner = () => {
         event.preventDefault()
         const formData = new FormData(event.target)
         const firstName = formData.get("firstName")
-        store.dispatch({
-            type: "UPDATE_FIRSTNAME",
-            payload: firstName
-        })
+        store.dispatch(updateFirstName(firstName))
     }
     useEffect(() => {
         store.subscribe(() => {
