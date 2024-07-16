@@ -6,6 +6,7 @@ import Total from '../features/total/Total.jsx';
 import Voucher from '../features/voucher/Voucher.jsx';
 import Owner from '../features/owner/Owner.jsx';
 import Menu from '../features/menu/Menu.jsx';
+import Notes from '../features/notes/Notes.jsx';
 
 function App() {
  return (
@@ -16,6 +17,7 @@ function App() {
             <Total />
             <Voucher />
             <Owner />
+            <Notes />
         </div>
     </Provider>
  );

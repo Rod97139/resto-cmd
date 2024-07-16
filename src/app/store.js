@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { cartSlice } from "../features/cart/cartSlice";
 import { ownerSlice } from "../features/owner/ownerSlice";
+import { notesSlice } from "../features/notes/notesSlice";
 
 
 let state = {
@@ -14,7 +15,8 @@ export const store = configureStore(
         preloadedState: state,
         reducer: combineReducers({
             list: cartSlice.reducer,
-            owner: ownerSlice.reducer
+            owner: ownerSlice.reducer,
+            notes: notesSlice.reducer
         })
     }
 )
