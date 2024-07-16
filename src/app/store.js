@@ -1,24 +1,12 @@
-import { configureStore, createAction, createReducer } from "@reduxjs/toolkit"
+import { combineReducers, configureStore, createAction, createReducer } from "@reduxjs/toolkit"
+import { cartSlice } from "../features/cart/cartSlice";
 
 
 let state = {
-    value: null,
+    owner: {},
     list: []
 };
 
-export const addProduct = createAction('ADD_PRODUCT', product => {
-    return {
-        payload: product
-    }
-})
-
-export const removeProduct = createAction('REMOVE_PRODUCT', () => {})
-
-export const applyVoucher = createAction('APPLY_VOUCHER', voucher => {
-    return {
-        payload: voucher
-    }
-})
 
 export const updateFirstName = createAction('UPDATE_FIRSTNAME', firstName => {
     return {
@@ -28,23 +16,9 @@ export const updateFirstName = createAction('UPDATE_FIRSTNAME', firstName => {
 
 const reducer = createReducer(state, (builder) => {
     builder
-      .addCase(addProduct, (currentState, action) => {
-        const listWithNewProduct = [...currentState.list, action.payload]
-        return {...currentState, list: listWithNewProduct }
-      })
-      .addCase(removeProduct, (currentState, action) => {
-        const listWithNewProduct = [...currentState.list, action.payload]
-        return {...currentState, list: listWithNewProduct }
-      })
-      .addCase(applyVoucher, (currentState, action) => {
-        const withVoucherList = currentState.list.map(
-            item => item.title === 'Super Crémeux' ? ({...item, price: action.payload.price}) : item
-        )
-        return {...currentState, list: withVoucherList}
-      })
       .addCase(updateFirstName, (currentState, action) => {
         const owner = {...currentState.owner, firstName: action.payload}
-        return {...currentState, owner}
+        return {...currentState, ...owner}
       })
 })
 
@@ -52,6 +26,9 @@ const reducer = createReducer(state, (builder) => {
 export const store = configureStore(
     {
         preloadedState: state,
-        reducer
+        reducer: combineReducers({
+            list: cartSlice.reducer,
+            owner: reducer
+        })
     }
 )
