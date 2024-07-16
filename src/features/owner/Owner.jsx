@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useStore } from "react-redux"
-import { updateFirstName } from "../../app/store"
+import { ownerSlice } from "./ownerSlice"
 
 const Owner = () => {
     const store = useStore()
@@ -10,7 +10,7 @@ const Owner = () => {
         event.preventDefault()
         const formData = new FormData(event.target)
         const firstName = formData.get("firstName")
-        store.dispatch(updateFirstName(firstName))
+        store.dispatch(ownerSlice.actions.updateFirstName(firstName))
     }
     useEffect(() => {
         store.subscribe(() => {

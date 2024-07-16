@@ -1,5 +1,6 @@
-import { combineReducers, configureStore, createAction, createReducer } from "@reduxjs/toolkit"
+import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { cartSlice } from "../features/cart/cartSlice";
+import { ownerSlice } from "../features/owner/ownerSlice";
 
 
 let state = {
@@ -8,27 +9,12 @@ let state = {
 };
 
 
-export const updateFirstName = createAction('UPDATE_FIRSTNAME', firstName => {
-    return {
-        payload: firstName
-    }
-})
-
-const reducer = createReducer(state, (builder) => {
-    builder
-      .addCase(updateFirstName, (currentState, action) => {
-        const owner = {...currentState.owner, firstName: action.payload}
-        return {...currentState, ...owner}
-      })
-})
-
-
 export const store = configureStore(
     {
         preloadedState: state,
         reducer: combineReducers({
             list: cartSlice.reducer,
-            owner: reducer
+            owner: ownerSlice.reducer
         })
     }
 )
