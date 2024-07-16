@@ -7,6 +7,7 @@ const Cart = () => {
     const store = useStore();
     const [list, setList] = useState(store.getState().list);
 
+    const totalOrder = list.reduce((prv, cur) => cur.price + prv, 0);
     useEffect(() => {
         store.subscribe(() => {
             setList(store.getState().list);
@@ -20,6 +21,9 @@ const Cart = () => {
                     list.map(
                         (item, index) => <span key={index} className="SelectedProduct">{item.title} {item.price}</span>
                     )
+                }
+                {
+                    list.length === 0 ? <div>Aucun produit sélectionné</div> : <div>Total de commande: {totalOrder}</div>
                 }
                 <div className="CartNavBar">
                     <button onClick={() => 
