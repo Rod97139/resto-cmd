@@ -2,9 +2,20 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getListQuantityProductPerName } from "../../app/selectors";
 import * as ProductList from '../../common/models';
 
+const TIME_TO_RESET_ORDER = 5000;
+
+export const resetOrderThunk = createAsyncThunk( 'cart/resetOrderThunk' , async () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject();
+    }, TIME_TO_RESET_ORDER)
+  })
+})
+
 export const addProductThunk = createAsyncThunk( 'cart/addProductThunk' , async (product, thunkApi) => {
     // Ajout du produit au panier via le dispatch du store
     thunkApi.dispatch(cartSlice.actions.addProduct(product));
+    thunkApi.dispatch(resetOrderThunk());
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             const state = thunkApi.getState();
@@ -52,5 +63,8 @@ export const cartSlice = createSlice({
     builder.addCase(addProductThunk.rejected, (state) => {
         return [...state]
     })
+    builder.addCase(resetOrderThunk.rejected, () => {
+        return []
+  })
   }
 })
