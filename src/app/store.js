@@ -3,6 +3,7 @@ import { cartSlice } from "../features/cart/cartSlice";
 import { ownerSlice } from "../features/owner/ownerSlice";
 import {thunk} from "redux-thunk"; 
 import { menuSlice } from "../features/menu/menuSlice";
+import { api } from "../services/fidelityApi";
 
 let state = {
     owner: {},
@@ -16,8 +17,9 @@ export const store = configureStore(
         reducer: combineReducers({
             list: cartSlice.reducer,
             owner: ownerSlice.reducer,
-            menu: menuSlice.reducer
+            menu: menuSlice.reducer,
+            [api.reducerPath]: api.reducer,
         }),
-        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware).concat(thunk),
     }
 )

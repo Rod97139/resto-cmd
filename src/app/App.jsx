@@ -7,6 +7,7 @@ import Voucher from '../features/voucher/Voucher.jsx';
 import Owner from '../features/owner/Owner.jsx';
 import Menu from '../features/menu/Menu.jsx';
 import Notes from '../features/notes/Notes.jsx';
+import Fidelity from '../features/fidelity/Fidelity.jsx';
 
 function App() {
  return (
@@ -17,6 +18,7 @@ function App() {
             <Total />
             <Voucher />
             <Owner />
+            <Fidelity />
         </div>
     </Provider>
  );
