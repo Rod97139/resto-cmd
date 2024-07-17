@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { cartSlice } from "../features/cart/cartSlice";
 import { ownerSlice } from "../features/owner/ownerSlice";
-import { notesSlice } from "../features/notes/notesSlice";
 import {thunk} from "redux-thunk"; 
+import { menuSlice } from "../features/menu/menuSlice";
 
 let state = {
     owner: {},
@@ -16,16 +16,8 @@ export const store = configureStore(
         reducer: combineReducers({
             list: cartSlice.reducer,
             owner: ownerSlice.reducer,
-            notes: notesSlice.reducer
+            menu: menuSlice.reducer
         }),
-        middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(
-            [
-              (store) => (next) => (action) => {
-                console.log('Action', action);
-                next(action);
-              },
-              thunk
-            ]
-        )
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
     }
 )

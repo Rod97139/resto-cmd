@@ -4,9 +4,9 @@ const IMAGES = {
     "Poulet Croquant": "images/PouletCroquant.svg",
     }
     
-    const ProductCard = ({ product, onSelect }) => <div className="ProductCard" onClick={onSelect}>
-    <img src={IMAGES[product.title]} alt={product.title} />
-    {product.title}
+export const ProductCard = ({ product, unavailable, onSelect }) => <div className="ProductCard" onClick={!unavailable ? onSelect : () => {}}>
+        <img src={IMAGES[product.title]} alt={product.title} />
+        {product.title}
+        {unavailable && <span className="ProductUnavailable">Indisponible</span>}
     </div>
-
     export default ProductCard

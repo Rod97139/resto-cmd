@@ -17,7 +17,6 @@ function App() {
             <Total />
             <Voucher />
             <Owner />
-            <Notes />
         </div>
     </Provider>
  );
